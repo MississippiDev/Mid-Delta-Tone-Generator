@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Two-Tone Generator | Mid-Delta Communications LLC  </title>
+  <title>Two-Tone Generator + Tone Finder</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <img src="MD Comms Banner 2.png" alt="Mid-Delta Communications LLC" class="logo" />
-    <h1> </h1>
-    <p>Tone-Out Generator for Fire/EMS Paging</p>
+    <h1></h1>
+    <p>Two-Tone Generator & Tone Frequency Detector</p>
   </header>
 
   <main>
@@ -39,15 +39,21 @@
         </label>
       </div>
 
-      <button type="button" onclick="playTwoTone()">🔊 Play Tones</button>
+      <button type="button" onclick="playTwoTone()">Play Tones</button>
     </form>
+
+    <hr />
+    <h2>🎵 Tone Frequency Finder</h2>
+    <p>Upload a short tone audio clip (MP3/WAV), and this tool will detect the A/B or Long tone frequencies.</p>
+    <input type="file" id="toneFile" accept="audio/*">
+    <button onclick="analyzeAdvancedTone()">Analyze Tone</button>
+    <div id="toneResult" style="margin-top: 1rem;"></div>
   </main>
 
   <footer>
-    <p>🔗 Mid-Delta Communications LLC • Tone Generator</p>
+    <p>🔗 Mid-Delta Communications LLC • Two-Tone Generator + Tone Finder</p>
   </footer>
 
-  <script src="recorder.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
