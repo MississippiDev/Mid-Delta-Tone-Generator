@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Two-Tone Generator | Mid-Delta Communications LLC  </title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="MD Comms Banner 2.png" alt="Mid-Delta Communications LLC" class="logo" />
+    <h1> </h1>
+    <p>Tone-Out Generator for Fire/EMS Paging</p>
+  </header>
+
+  <main>
+    <form id="toneForm">
+      <h2>🔊 Two-Tone Generator</h2>
+      <div class="tone-row">
+        <label>A Tone Frequency (Hz): <input type="number" id="toneA" value="600" /></label>
+        <label>A Tone Duration (ms): <input type="number" id="durationA" value="1000" /></label>
+      </div>
+      <div class="tone-row">
+        <label>B Tone Frequency (Hz): <input type="number" id="toneB" value="800" /></label>
+        <label>B Tone Duration (ms): <input type="number" id="durationB" value="1000" /></label>
+      </div>
+
+      <div class="save-section">
+        <input type="text" id="presetName" placeholder="Preset Name" />
+        <button type="button" onclick="savePreset()">💾 Save Preset</button>
+        <button type="button" onclick="downloadTone()">⬇️ Download WAV</button>
+      </div>
+
+      <div class="load-section">
+        <label>📂 Load Saved Preset:
+          <select id="savedPresets" onchange="loadPreset()">
+            <option value="">-- Select Saved Tone --</option>
+          </select>
+        </label>
+      </div>
+
+      <button type="button" onclick="playTwoTone()">🔊 Play Tones</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>🔗 Mid-Delta Communications LLC • Tone Generator</p>
+  </footer>
+
+  <script src="recorder.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
