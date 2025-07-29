@@ -115,3 +115,72 @@ function downloadTone() {
   recorder.start();
   setTimeout(() => recorder.stop(), durA + durB + 1000);
 }
+
+function analyzeAdvancedTone() {
+  const fileInput = document.getElementById("toneFile");
+  const resultDiv = document.getElementById("toneResult");
+  resultDiv.innerHTML = "⏳ Analyzing...";
+
+  if (!fileInput.files[0]) {
+    resultDiv.innerHTML = "❌ Please upload a tone audio file.";
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  reader.onload = function(e) {
+    audioCtx.decodeAudioData(e.target.result).then(buffer => {
+      const sampleRate = buffer.sampleRate;
+      const duration = buffer.duration;
+
+      const analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 4096;
+
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      source.start();
+
+      setTimeout(() => {
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(data);
+
+        let max1 = -Infinity, idx1 = -1;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i] > max1) {
+            max1 = data[i];
+            idx1 = i;
+          }
+        }
+
+        data[idx1] = 0;
+        let max2 = -Infinity, idx2 = -1;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i] > max2) {
+            max2 = data[i];
+            idx2 = i;
+          }
+        }
+
+        const nyquist = sampleRate / 2;
+        const freq1 = (idx1 * nyquist) / data.length;
+        const freq2 = (idx2 * nyquist) / data.length;
+
+        const type = duration > 3 ? "Long Tone" : "Two-Tone";
+        resultDiv.innerHTML = `
+          ✅ Detected Mode: ${type}<br/>
+          🎯 A Tone: <strong>${freq1.toFixed(2)} Hz</strong><br/>
+          🎯 B Tone: <strong>${freq2.toFixed(2)} Hz</strong><br/>
+          ⏱️ Duration: ${duration.toFixed(2)} seconds
+        `;
+      }, 1000);
+    }).catch(() => {
+      resultDiv.innerHTML = "❌ Error decoding audio.";
+    });
+  };
+
+  reader.readAsArrayBuffer(file);
+}
