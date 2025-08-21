@@ -1,2 +1,2 @@
 # Mid-Delta-Tone-Generator
-Two-Tone Generator for Fire/EMS Paging
+Two-Tone Generator & Tone Frequency Detector for Fire/EMS Paging
