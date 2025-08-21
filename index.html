@@ -27,12 +27,12 @@
 
       <div class="save-section">
         <input type="text" id="presetName" placeholder="Preset Name" />
-        <button type="button" onclick="savePreset()">💾 Save Preset</button>
-        <button type="button" onclick="downloadTone()">⬇️ Download WAV</button>
+        <button type="button" onclick="savePreset()">Save Preset</button>
+        <button type="button" onclick="downloadTone()">⬇Download WAV</button>
       </div>
 
       <div class="load-section">
-        <label>📂 Load Saved Preset:
+        <label>Load Saved Preset:
           <select id="savedPresets" onchange="loadPreset()">
             <option value="">-- Select Saved Tone --</option>
           </select>
@@ -43,7 +43,7 @@
     </form>
 
     <hr />
-    <h2>🎵 Tone Frequency Finder</h2>
+    <h2>Tone Frequency Finder</h2>
     <p>Upload a short tone audio clip (MP3/WAV), and this tool will detect the A/B or Long tone frequencies.</p>
     <input type="file" id="toneFile" accept="audio/*">
     <button onclick="analyzeAdvancedTone()">Analyze Tone</button>
